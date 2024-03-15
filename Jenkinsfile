@@ -10,14 +10,14 @@ pipeline {
        
         stage('Docker Build') {
             steps {
-                sh "docker build . -t sheroon/hiring-app:$BUILD_NUMBER"
+                sh "docker build . -t sheroon/hiring:$BUILD_NUMBER"
             }
         }
         stage('Docker Push') {
             steps {
                 withCredentials([string(credentialsId: 'sheroon', variable: 'hubPwd')]) {
                     sh "docker login -u sheroon -p ${hubPwd}"
-                    sh "docker push sheroon/hiring-app:$BUILD_NUMBER"
+                    sh "docker push sheroon/hiring:$BUILD_NUMBER"
                 }
             }
         }
